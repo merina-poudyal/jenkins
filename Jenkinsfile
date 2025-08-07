@@ -1,7 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_BRANCH = 'master'
+        GIT_URL = 'https://github.com/merina-poudyal/jenkins.git'
+    }
+
     stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: "${env.GIT_BRANCH}", url: "${env.GIT_URL}"
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 script {
